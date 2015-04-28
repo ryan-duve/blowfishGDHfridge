@@ -1,0 +1,537 @@
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 8142	Looker: 8142
+pedestal     Reader: 19	Looker: 19
+flasher      Reader: 945	Looker: 945
+monitor      Reader: 945	Looker: 945
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 48	Looker: 48
+
+Real time (s):       94.0000
+Live time (s):       94.0000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 2	Looker: 2
+pedestal     Reader: 1	Looker: 1
+scalerread   Reader: 2	Looker: 2
+
+Real time (s):       0.0100000
+Live time (s):       0.0100000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 727111	Looker: 727111
+pedestal     Reader: 118	Looker: 118
+scalerread   Reader: 5002	Looker: 5002
+
+Real time (s):       10000.0
+Live time (s):       10000.0
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 18712	Looker: 18712
+pedestal     Reader: 19	Looker: 19
+flasher      Reader: 1000	Looker: 1000
+monitor      Reader: 1000	Looker: 1000
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 52	Looker: 52
+
+Real time (s):       100.000
+Live time (s):       100.000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 18712	Looker: 18712
+pedestal     Reader: 19	Looker: 19
+flasher      Reader: 1000	Looker: 1000
+monitor      Reader: 1000	Looker: 1000
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 52	Looker: 52
+
+Real time (s):       100.000
+Live time (s):       100.000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 18770	Looker: 18770
+pedestal     Reader: 19	Looker: 19
+flasher      Reader: 1000	Looker: 1000
+monitor      Reader: 1000	Looker: 1000
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 52	Looker: 52
+
+Real time (s):       100.000
+Live time (s):       100.000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 541720	Looker: 541720
+pedestal     Reader: 47	Looker: 47
+flasher      Reader: 28760	Looker: 28760
+monitor      Reader: 28760	Looker: 28760
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 1439	Looker: 1439
+
+Real time (s):       2876.00
+Live time (s):       2876.00
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 943574	Looker: 943574
+pedestal     Reader: 68	Looker: 68
+flasher      Reader: 50000	Looker: 50000
+monitor      Reader: 50000	Looker: 50000
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 2502	Looker: 2502
+
+Real time (s):       5000.00
+Live time (s):       5000.00
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 0	Looker: 0
+pedestal     Reader: 10	Looker: 10
+flasher      Reader: 100	Looker: 100
+monitor      Reader: 100	Looker: 100
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 7	Looker: 7
+
+Real time (s):       10.0000
+Live time (s):       10.0000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 2787	Looker: 2787
+pedestal     Reader: 10	Looker: 10
+flasher      Reader: 100	Looker: 100
+monitor      Reader: 100	Looker: 100
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 7	Looker: 7
+
+Real time (s):       10.0000
+Live time (s):       10.0000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 2787	Looker: 2787
+pedestal     Reader: 10	Looker: 10
+flasher      Reader: 100	Looker: 100
+monitor      Reader: 100	Looker: 100
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 7	Looker: 7
+
+Real time (s):       10.0000
+Live time (s):       10.0000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 2874	Looker: 2874
+pedestal     Reader: 10	Looker: 10
+flasher      Reader: 100	Looker: 100
+monitor      Reader: 100	Looker: 100
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 7	Looker: 7
+
+Real time (s):       10.0000
+Live time (s):       10.0000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 2920	Looker: 2920
+pedestal     Reader: 10	Looker: 10
+flasher      Reader: 100	Looker: 100
+monitor      Reader: 100	Looker: 100
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 7	Looker: 7
+
+Real time (s):       10.0000
+Live time (s):       10.0000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 3903	Looker: 3903
+pedestal     Reader: 10	Looker: 10
+flasher      Reader: 100	Looker: 100
+monitor      Reader: 100	Looker: 100
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 7	Looker: 7
+
+Real time (s):       10.0000
+Live time (s):       10.0000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 281	Looker: 281
+pedestal     Reader: 10	Looker: 10
+flasher      Reader: 100	Looker: 100
+monitor      Reader: 100	Looker: 100
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 7	Looker: 7
+
+Real time (s):       10.0000
+Live time (s):       10.0000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 364	Looker: 364
+pedestal     Reader: 10	Looker: 10
+flasher      Reader: 100	Looker: 100
+monitor      Reader: 100	Looker: 100
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 7	Looker: 7
+
+Real time (s):       10.0000
+Live time (s):       10.0000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 35251	Looker: 35251
+pedestal     Reader: 28	Looker: 28
+flasher      Reader: 10000	Looker: 10000
+monitor      Reader: 10000	Looker: 10000
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 502	Looker: 502
+
+Real time (s):       1000.00
+Live time (s):       1000.00
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 8884	Looker: 8884
+pedestal     Reader: 15	Looker: 15
+flasher      Reader: 556	Looker: 556
+monitor      Reader: 556	Looker: 556
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 28	Looker: 28
+
+Real time (s):       54.0000
+Live time (s):       54.0000
+Live   fraction (%): 100.000
+Starting run 1
+**** Run 1 ****
+    Accelerator OFF mode
+    High Voltages NOT read
+    X-arm disabled
+    Pedestals disabled
+    Pedestals triggered by N-OR
+    Gamma window disabled
+    Flashers disabled
+    Flasher Monitor events disabled
+    Flasher Monitor multiplying factor = 0
+    Flux Monitor events disabled
+    Paddle Monitor events disabled
+    DAQ expecting regular pulse mode from ring
+
+*** End of Run Status: ***
+Events:
+lamtrig      Reader: 0	Looker: 0
+neutron      Reader: 16085	Looker: 16085
+pedestal     Reader: 19	Looker: 19
+flasher      Reader: 1000	Looker: 1000
+monitor      Reader: 1000	Looker: 1000
+flux         Reader: 0	Looker: 0
+paddle       Reader: 0	Looker: 0
+scalerread   Reader: 52	Looker: 52
+
+Real time (s):       100.000
+Live time (s):       100.000
+Live   fraction (%): 100.000

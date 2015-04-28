@@ -1,0 +1,93 @@
+targHoldR = .5*cm;
+targHoldH = 5.*cm;  
+targHoldTh = .1*cm;
+startingAngle = 0.0*deg;
+spanningAngle = 360.*deg;
+
+pipeRadius = .5*mm; 
+pipeThickness = .1*mm; 
+heightA = 8.5*cm; 
+heightB = 1*cm; 
+heightC = 4.5*cm; 
+heightD = 1*cm; 
+//heightE = 1.5*cm; 
+alpha_ang = 10*deg; 
+beta_ang = 15*deg;
+
+
+shellOne_narrowRad = 2.5*cm;
+shellOne_wideRad = 4.5*cm;
+shellOne_delta = 3.5*cm;
+shellOne_thick = .08*cm; 
+shellOne_narrowHeight = 21.2*cm;
+shellOne_wideHeight = 19.4*cm; 
+
+shellTwo_narrowRad = 2.35*cm;
+shellTwo_wideRad = 4.2*cm;
+shellTwo_delta = 2.8*cm;
+shellTwo_thick = .03*cm;
+shellTwo_narrowHeight = 20.9*cm;
+shellTwo_wideHeight = 19.6*cm;
+
+shellThree_narrowRad = 2.2*cm;
+shellThree_wideRad = 3.9*cm;
+shellThree_delta = 2.65*cm;
+shellThree_thick = .09*cm;
+shellThree_narrowHeight = 20.9*cm;
+shellThree_wideHeight = 19.4*cm;
+
+shellFour_narrowRad = 1.9*cm;
+shellFour_wideRad = 3.5*cm;
+shellFour_delta = 2.7*cm;
+shellFour_thick = .09*cm;
+shellFour_narrowHeight = 20*cm;
+shellFour_wideHeight = 19.6*cm;
+
+mixing_narrowRad = 1.35*cm;
+mixing_wideRad = 2.51*cm;
+mixing_delta = 2.1*cm;
+mixing_thick =.08*cm;
+mixing_narrowHeight =21.6*cm;
+mixing_wideHeight=35*cm;
+
+outerCone_radius = 94*mm;
+outerCone_delta = 28.5*cm;
+ 
+middleCone_radius = 86*mm;
+middleCone_delta = 25.1*cm; 
+
+innerCone_radius = 74*mm; 
+innerCone_delta =198*mm; 
+
+fourthCone_radius = 4.2*cm; 
+fourthCone_delta = 4.3*cm; 
+
+tub_height= 14*cm;
+outer_tube_rad = 1.2*cm;
+outer_tube_thick = .1*cm;
+
+mixing_tube_rad = 1*cm;
+mixing_tube_thick = .1*cm;
+mixing_tube_height = 15.1*cm;
+//
+
+tube1_inner = 4*cm; 
+tube1_outer = 8.0*cm;
+tube1_height = 2.5*cm; 
+
+tube3_inner = 2*cm; 
+tube3_outer = 4.0*cm;
+tube3_height = 10.1*cm; 
+
+gas_two_offset = 4.6*mm;
+gas_three_offset = 3.3*mm; 
+gas_four_offset = 4.4*mm;
+mixing_off = 1.2*cm;
+mixing_tube_off = -3*cm;
+//window_offset = 49*cm;
+window_offset = 1*cm;
+tube1_offset = 60*cm;
+tube3_offset = 43*cm;   
+//off = .75*cm; 
+
+

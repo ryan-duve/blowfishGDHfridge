@@ -1,0 +1,88 @@
+/************************************************************
+ * BXPGATh232.hh
+ *
+ * Ward Wurtz (waw113@mail.usask.ca)
+ * Subatomic Physics Graduate Student
+ * University of Saskatchewan
+ * Saskatoon, SK CANADA
+ * Supervisors: Rob Pywell
+ *
+ * Description:
+ *
+ * This class defines the initial particles and its energy, momentum
+ * and direction.  Simulates a Th-232 source, such as the background
+ * radiation found in the gamma vault at HIGS.
+ *
+ * Credits:
+ * 
+ * Much of this code is from my supervisor, Dr. Pywell and the
+ * examples produced by the Geant4 Collaboration and distributed
+ * with GEANT4.  Lisence details for the GEANT4 collaboration code
+ * can be found at http://geant4.web.cern.ch/geant4/license/
+ * Since these details are vague, I assume that all code is released
+ * under an LGPL or BSD-like license.
+ * 
+ ********************************************************************
+ * DISCLAIMER                                                       *
+ *                                                                  *
+ * The following disclaimer summarizes all the specific disclaimers *
+ * of contributors to this software. The specific disclaimers,which *
+ * govern, are listed with their locations in:                      *
+ *   http://cern.ch/geant4/license                                  *
+ *                                                                  *
+ * Neither the authors of this software system, nor their employing *
+ * institutes,nor the agencies providing financial support for this *
+ * work  make  any representation or  warranty, express or implied, *
+ * regarding  this  software system or assume any liability for its *
+ * use.                                                             *
+ *                                                                  *
+ * By copying,  distributing  or modifying the Program (or any work *
+ * based  on  the Program)  you indicate  your  acceptance of  this *
+ * statement, and all its terms.                                    *
+ ********************************************************************/
+
+#ifndef BXPGATh232_h
+#define BXPGATh232_h 1
+
+//Geant4 classes
+#include "G4ParticleTable.hh"
+#include "G4ParticleGun.hh"
+#include "G4Event.hh"
+
+//Virtual class
+#include "BXPrimaryGeneratorAction.hh"
+
+//G4Lucid clases
+class G4LucidLong;
+
+class BXPGATh232 : public BXPrimaryGeneratorAction
+{
+	public:
+
+	//constructor and destructor
+    	BXPGATh232();
+    	~BXPGATh232();
+
+	//used by Geant4 to generate the primary particles of the event
+    	void GeneratePrimaries(G4Event* anEvent);
+
+	private:
+
+	//Keeps track of the number of gammas emitted
+	G4LucidLong * fGammasEmitted;
+
+	//The thorium energy spectrum above 900 keV
+	//Energies and intensities taken from ENSDF database
+	//The decays 228Ac->228Th, 212Bi->212Po and 208Tl->209Pb have gamma rays in the required
+	//energy and intensity range.
+	//See Ward Wurtz's logbook for 23 June 2006
+	//Will use the relative intensities to compute which gamma ray is emitted
+	static const G4int kNumbThGammas = 15; //we use the most energetic principle gamma rays
+	static const G4double fThEnergy[kNumbThGammas]; 
+	static const G4double fThIntensity[kNumbThGammas];
+	G4double fRelIntensity[kNumbThGammas];
+};
+
+#endif
+
+//EOF BXPGATh232.hh

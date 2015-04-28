@@ -1,0 +1,43 @@
+//See BXPGAGeantino.hh
+
+#include "BXPGAGeantino.hh"
+
+//Geant4 includes
+#include "globals.hh"
+#include "Randomize.hh"
+#include "G4ParticleDefinition.hh"
+
+//Lucid includes
+#include "G4Lucid.hh"
+#include "G4LucidEvent.hh"
+#include "G4LucidLong.hh"
+
+//constructor
+BXPGAGeantino::BXPGAGeantino()
+{
+	//Get Lucid variable to count the number of geantino hits
+	fGeantinosEmitted = G4Lucid::GetLucidPointer()->GetLucidEvent("ideal_windup")->GetLucidLong("geantinos_emitted");
+	
+}
+
+//destructor
+BXPGAGeantino::~BXPGAGeantino()
+{;}
+
+//Emit a geantino in a random direction
+void BXPGAGeantino::GeneratePrimaries(G4Event* anEvent)
+{
+
+	//Sets the direction to a random one
+	fParticleGun->SetParticleMomentumDirection(RandomDirection());
+
+	//We don't allow the user to change the particle type
+  	fParticleGun->SetParticleDefinition(fParticleTable->FindParticle("geantino"));
+	
+	//Inform Lucid that a geantino has been emitted
+	fGeantinosEmitted->Increment();
+	
+  	fParticleGun->GeneratePrimaryVertex(anEvent); //Fire at will, Mr. Worf!
+}
+
+//EOF BXPGAGeantino.cc

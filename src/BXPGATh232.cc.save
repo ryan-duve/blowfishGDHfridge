@@ -1,0 +1,68 @@
+//See BXPGATh232.hh
+
+#include "BXPGATh232.hh"
+
+//Geant4 includes
+#include "globals.hh"
+#include "Randomize.hh"
+#include "G4ParticleDefinition.hh"
+
+//Lucid includes
+#include "G4Lucid.hh"
+#include "G4LucidEvent.hh"
+#include "G4LucidLong.hh"
+
+//Initialize the static arrays
+const G4double BXPGATh232::fThEnergy[kNumbThGammas] = {2614.533*keV,1620.500*keV,1512.700*keV,1666.523*keV,1638.261*keV,
+	1630.627*keV,1625.060*keV,1588.200*keV,1580.530*keV,1501.570*keV,1495.910*keV,1459.138*keV,968.971*keV,964.766*keV,911.204*keV};
+const G4double BXPGATh232::fThIntensity[kNumbThGammas] = 
+	{0.389,0.010,0.003,0.002,0.005,0.016,0.003,0.035,0.007,0.005,0.009,0.009,0.172,0.054,0.281};
+
+//constructor
+BXPGATh232::BXPGATh232()
+{
+	//Get Lucid variable to count the number of geantino hits
+	fGammasEmitted = G4Lucid::GetLucidPointer()->GetLucidEvent("ideal_windup")->GetLucidLong("gammas_emitted");
+
+	//Compute the relative intensities
+	G4double totalIntensity = 0.0;
+	for(G4int jj = 0; jj < kNumbThGammas; jj++){
+		totalIntensity += fThIntensity[jj]; }
+	for(G4int jj = 0; jj < kNumbThGammas; jj++){
+		fRelIntensity[jj] = fThIntensity[jj]/totalIntensity;}
+	
+} //end of constructor
+
+//destructor
+BXPGATh232::~BXPGATh232()
+{;}
+
+//Generate a new particle with position and momentum
+void BXPGATh232::GeneratePrimaries(G4Event* anEvent)
+{
+	//Randomly chose a gamma line based on the relative intensity
+	G4double energy = 0.0;
+	G4double energyRandNumber = G4UniformRand();
+	G4double doubleCounter = 0;
+	for(G4int jj = 0; jj < kNumbThGammas; jj++)
+	{
+		doubleCounter += fRelIntensity[jj];
+		if(energyRandNumber < doubleCounter){ 
+			energy = fThEnergy[jj]; 
+			break;}
+	}
+
+	//Sets the direction and energy of the particle
+ 	fParticleGun->SetParticleMomentumDirection(RandomDirectionAtCell(0));
+  	fParticleGun->SetParticleEnergy( energy );
+
+	//Ensure that the user has not changed the type of particle to be emitted
+  	fParticleGun->SetParticleDefinition(fParticleTable->FindParticle("gamma"));
+
+	//Inform Lucid that a gamma has been emitted
+	fGammasEmitted->Increment();
+
+  	fParticleGun->GeneratePrimaryVertex(anEvent); //Fire at will, Mr. Worf!
+}
+
+//EOF BXPGATh232.cc

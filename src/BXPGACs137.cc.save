@@ -1,0 +1,41 @@
+//See BXPGACs137.hh
+
+#include "BXPGACs137.hh"
+
+//Geant4 includes
+#include "globals.hh"
+#include "Randomize.hh"
+#include "G4ParticleDefinition.hh"
+
+//Lucid includes
+#include "G4Lucid.hh"
+#include "G4LucidEvent.hh"
+#include "G4LucidLong.hh"
+
+//constructor
+BXPGACs137::BXPGACs137()
+{
+	//Get Lucid variable to count the number of geantino hits
+	fGammasEmitted = G4Lucid::GetLucidPointer()->GetLucidEvent("ideal_windup")->GetLucidLong("gammas_emitted");
+
+} //end of constructor
+
+//destructor
+BXPGACs137::~BXPGACs137()
+{;}
+
+//Generate a new particle with position and momentum
+void BXPGACs137::GeneratePrimaries(G4Event* anEvent)
+{
+	//Sets the direction and energy of the gamma ray
+	//From ENSDF database, 27 June 2006
+ 	fParticleGun->SetParticleMomentumDirection(RandomDirectionAtCell(0));
+  	fParticleGun->SetParticleEnergy(661.657*keV );
+  	fParticleGun->SetParticleDefinition(fParticleTable->FindParticle("gamma"));
+  	fParticleGun->GeneratePrimaryVertex(anEvent);
+
+	//Inform Lucid that a gamma has been emitted
+	fGammasEmitted->Increment();
+}
+
+//EOF BXPGACs137.cc

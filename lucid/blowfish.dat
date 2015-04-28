@@ -1,0 +1,222 @@
+#####################################################################
+## Control Misc stuff
+#####################################################################
+exp_dir = "/home/rob/geant4/blowfishGDH/lucid" # base directory for experiment
+archive_dump = 0	# 1 Archive dump file, 0 means don't archive
+clearit      = 1	# 1 means clear all, 0 means don't clear
+write_hv     = 0	# 1 means write (current) measured HVs
+ped_online = 1		# 1 means use online peds, 0 read them from file
+
+#####################################################################
+##TDC gamma flash search region (for the TDC align button)
+#####################################################################
+gamma_peak_lo =  600
+gamma_peak_hi = 1200
+
+#####################################################################
+##PSD cut settings
+#####################################################################
+psd_cut=-20
+## TDC cuts
+tdc_cut_lo = 1075
+tdc_cut_hi = 1200
+tdc_rand_lo = 1275
+tdc_rand_hi = 1400
+
+#####################################################################
+## PSD auto-rotation band cuts (on ADC_long value)
+## PSD target locations for the base and upper psd values
+#####################################################################
+#PSD_loband_lo = 240
+#PSD_loband_hi = 400
+PSD_loband_lo = 500
+PSD_loband_hi = 600
+
+#PSD_hiband_lo = 1400
+#PSD_hiband_hi = 1900
+PSD_hiband_lo = 2000
+PSD_hiband_hi = 2500
+
+psd_base_ch   = 0  # target location for the base of the 'V'
+psd_m_targ    = -33  # target slope for gamma arm of psd vs. ph
+
+## cell mapping for 2D histogram cell placement (upstream half - cells 1 to 48
+row[42]=1
+row[43]=2
+row[34]=2
+row[41]=2
+row[35]=3
+row[26]=3
+row[33]=3
+row[27]=4
+row[18]=4
+row[25]=4
+row[19]=5
+row[10]=5
+row[17]=5
+row[11]=6
+row[2]=6
+row[9]=6
+row[3]=7
+row[1]=7
+row[44]=8
+row[36]=8
+row[28]=8
+row[20]=8
+row[12]=8
+row[4]=8
+row[8]=8
+row[16]=8
+row[24]=8
+row[32]=8
+row[40]=8
+row[48]=8
+row[5]=9
+row[7]=9
+row[13]=10
+row[6]=10
+row[15]=10
+row[21]=11
+row[14]=11
+row[23]=11
+row[29]=12
+row[22]=12
+row[31]=12
+row[37]=13
+row[30]=13
+row[39]=13
+row[45]=14
+row[38]=14
+row[47]=14
+row[46]=15
+col[44]=1
+col[43]=2
+col[36]=2
+col[45]=2
+col[35]=3
+col[28]=3
+col[37]=3
+col[27]=4
+col[20]=4
+col[29]=4
+col[19]=5
+col[12]=5
+col[21]=5
+col[11]=6
+col[4]=6
+col[13]=6
+col[5]=7
+col[3]=7
+col[42]=8
+col[34]=8
+col[26]=8
+col[18]=8
+col[10]=8
+col[2]=8
+col[6]=8
+col[14]=8
+col[22]=8
+col[30]=8
+col[38]=8
+col[46]=8
+col[1]=9
+col[7]=9
+col[9]=10
+col[8]=10
+col[15]=10
+col[17]=11
+col[16]=11
+col[23]=11
+col[25]=12
+col[24]=12
+col[31]=12
+col[33]=13
+col[32]=13
+col[39]=13
+col[41]=14
+col[40]=14
+col[47]=14
+col[48]=15
+
+## cell mapping for 2D histogram cell placement (upstream half - cells 49 to 88
+row[50]=2
+row[51]=3
+row[58]=3
+row[49]=3
+row[59]=4
+row[66]=4
+row[57]=4
+row[67]=5
+row[74]=5
+row[65]=5
+row[75]=6
+row[82]=6
+row[73]=6
+row[83]=7
+row[81]=7
+row[84]=8
+row[76]=8
+row[68]=8
+row[60]=8
+row[52]=8
+row[56]=8
+row[64]=8
+row[72]=8
+row[80]=8
+row[88]=8
+row[85]=9
+row[87]=9
+row[77]=10
+row[86]=10
+row[79]=10
+row[71]=11
+row[69]=11
+row[78]=11
+row[70]=12
+row[63]=12
+row[61]=12
+row[53]=13
+row[62]=13
+row[55]=13
+row[54]=14
+col[52]=2
+col[51]=3
+col[60]=3
+col[53]=3
+col[59]=4
+col[68]=4
+col[61]=4
+col[67]=5
+col[76]=5
+col[69]=5
+col[75]=6
+col[84]=6
+col[77]=6
+col[83]=7
+col[85]=7
+col[82]=8
+col[74]=8
+col[66]=8
+col[58]=8
+col[50]=8
+col[54]=8
+col[62]=8
+col[70]=8
+col[78]=8
+col[86]=8
+col[81]=9
+col[87]=9
+col[73]=10
+col[88]=10
+col[79]=10
+col[71]=11
+col[65]=11
+col[80]=11
+col[72]=12
+col[57]=12
+col[63]=12
+col[55]=13
+col[64]=13
+col[49]=13
+col[56]=14
+

@@ -1,0 +1,76 @@
+/************************************************************
+ * BXPGACs137.hh
+ *
+ * Ward Wurtz (waw113@mail.usask.ca)
+ * Subatomic Physics Graduate Student
+ * University of Saskatchewan
+ * Saskatoon, SK CANADA
+ * Supervisors: Rob Pywell
+ *
+ * Description:
+ *
+ * This class defines the initial particles and its energy, momentum
+ * and direction.  Simulates the 662 keV gamma from a Cs-137 source.
+ *
+ * Credits:
+ * 
+ * Much of this code is from my supervisor, Dr. Pywell and the
+ * examples produced by the Geant4 Collaboration and distributed
+ * with GEANT4.  Lisence details for the GEANT4 collaboration code
+ * can be found at http://geant4.web.cern.ch/geant4/license/
+ * Since these details are vague, I assume that all code is released
+ * under an LGPL or BSD-like license.
+ * 
+ ********************************************************************
+ * DISCLAIMER                                                       *
+ *                                                                  *
+ * The following disclaimer summarizes all the specific disclaimers *
+ * of contributors to this software. The specific disclaimers,which *
+ * govern, are listed with their locations in:                      *
+ *   http://cern.ch/geant4/license                                  *
+ *                                                                  *
+ * Neither the authors of this software system, nor their employing *
+ * institutes,nor the agencies providing financial support for this *
+ * work  make  any representation or  warranty, express or implied, *
+ * regarding  this  software system or assume any liability for its *
+ * use.                                                             *
+ *                                                                  *
+ * By copying,  distributing  or modifying the Program (or any work *
+ * based  on  the Program)  you indicate  your  acceptance of  this *
+ * statement, and all its terms.                                    *
+ ********************************************************************/
+
+#ifndef BXPGACs137_h
+#define BXPGACs137_h 1
+
+//Geant4 classes
+#include "G4ParticleTable.hh"
+#include "G4ParticleGun.hh"
+#include "G4Event.hh"
+
+//Virtual class
+#include "BXPrimaryGeneratorAction.hh"
+
+//G4Lucid clases
+class G4LucidLong;
+
+class BXPGACs137 : public BXPrimaryGeneratorAction
+{
+	public:
+
+	//constructor and destructor
+    	BXPGACs137();
+    	~BXPGACs137();
+
+	//used by Geant4 to generate the primary particles of the event
+    	void GeneratePrimaries(G4Event* anEvent);
+
+	private:
+
+	//Keeps track of the number of gammas and positrons emitted
+	G4LucidLong * fGammasEmitted;
+};
+
+#endif
+
+//EOF BXPGACs137.hh

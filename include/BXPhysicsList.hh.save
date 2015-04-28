@@ -1,0 +1,80 @@
+ /************************************************************
+ * BXPhysicsList.hh
+ *
+ * Ward Wurtz (waw113@mail.usask.ca)
+ * Subatomic Physics Graduate Student
+ * University of Saskatchewan
+ * Saskatoon, SK CANADA
+ * Supervisors: Rob Pywell
+ *
+ * Description:
+ *
+ * Having a simulation with every physics process would be nice,
+ * but is not feasable.  This file controls what physics processes
+ * and particles are included in the simulations.  Since this
+ * simullation is concerned with neutrons, there will be
+ * neutrons processes ontop of the usual EM processes.
+ * This physics list is based on LHEP_PRECO_HP
+ *
+ * Credits:
+ * 
+ * Much of this code is from my supervisor, Dr. Pywell and the
+ * examples produced by the Geant4 Collaboration and distributed
+ * with GEANT4.  Lisence details for the GEANT4 collaboration code
+ * can be found at http://geant4.web.cern.ch/geant4/license/
+ * Since these details are vague, I assume that all code is released
+ * under an LGPL or BSD-like license.
+ * 
+ ********************************************************************
+ * DISCLAIMER                                                       *
+ *                                                                  *
+ * The following disclaimer summarizes all the specific disclaimers *
+ * of contributors to this software. The specific disclaimers,which *
+ * govern, are listed with their locations in:                      *
+ *   http://cern.ch/geant4/license                                  *
+ *                                                                  *
+ * Neither the authors of this software system, nor their employing *
+ * institutes,nor the agencies providing financial support for this *
+ * work  make  any representation or  warranty, express or implied, *
+ * regarding  this  software system or assume any liability for its *
+ * use.                                                             *
+ *                                                                  *
+ * By copying,  distributing  or modifying the Program (or any work *
+ * based  on  the Program)  you indicate  your  acceptance of  this *
+ * statement, and all its terms.                                    *
+ ********************************************************************/
+
+
+#ifndef BXPhysicsList_h
+#define BXPhysicsList_h 1
+
+#include "G4VUserPhysicsList.hh"
+#include "globals.hh"
+
+
+class BXPhysicsList: public G4VUserPhysicsList
+{
+  	public:
+    	BXPhysicsList();
+   	~BXPhysicsList();
+
+  	protected:
+
+    	//Construct particle and physics
+    	void ConstructParticle();
+    	void ConstructProcess();
+   
+    	//These methods construct physics processes and register them
+    	void ConstructGeneral();
+    	void ConstructEM();
+	void ConstructHadronic();
+	void ConstructPhotonuclear();
+    	
+	//Sets the Cuts
+	void SetCuts();
+};
+
+#endif
+
+//End of file BXPhysicsList.hh
+

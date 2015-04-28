@@ -1,0 +1,113 @@
+blowfishGDHFridge
+=================
+
+Geant4 simulation of blowfish in the DGH configuration
+with the Fridge/Target
+
+This version assumes Lucid is installed on your computer
+since it needs Lucid libraries to write an output file
+in the same format as from the data acquisition system.
+
+Installation instructions.
+-------------------------
+
+1. Geant4
+=========
+These instructions assume a recent version of Geant4 is installed.
+Currenty I use geant4.10.00.p03
+
+At http://nucleus.usask.ca/ftp/pub/rob/
+the file GEANT4_INSTALL provides a description of how we install
+geant4 on our computers at the U of Saskatchewan.
+
+In the following we will suppose you have installed geant4
+in a directory structure such as
+/home/user/geant4
+        /geant4-source
+        /geant4-install
+        /geant4-build
+If your structure is different you will need to modify accordingly.
+
+2. G4Lucid
+==========
+Obtain the file "G4Lucid-1.1.tgz" from http://nucleus.usask.ca/ftp/pub/rob
+Unpack the tar file in "/home/user/geant4"
+Follow the installation instructions found in
+/home/user/geant4/G4Lucid-1.1/README
+
+3. LightOutput
+==============
+Obtain the file "LightOutput-1.2.tgz" from http://nucleus.usask.ca/ftp/pub/rob
+Unpack the tar file in "/home/user/geant4"
+Follow the installation instructions found in
+/home/user/geant4/LightOutput-1.2/README
+
+4. blowfishGDHFridge
+====================
+
+Obtain the file "blowfishGDHFridge-1.0.tgz" from http://nucleus.usask.ca/ftp/pub/rob/
+Unpack the tar file in "/home/user/geant4"
+
+e.g. suppose you have installed geant4 in a directory structure
+/home/user/geant4
+        /geant4-source
+        /geant4-install
+        /geant4-build
+then
+        cd /home/user/geant4
+and type
+        tar  zxvf blowfishGHDFridge-1.0.tgz
+this will create the directory "BlowfishGDHFridge-1.0"
+
+Set the environment variables as they would be for compiling
+a geant4 simulation:
+        e.g. by cd /home/user/geant4/geant4-install/bin),
+        then source geant4-config
+then
+        cd /home/user/geant4/blowfishGDHFridge-1.0
+
+Building the application.
+-------------------------
+Using the CMake GUI is easiest so this will be described
+but you can also use the command line.
+Start the GUI
+	Browse Source and set it to /home/user/geant4/blowfishGDHFridge-1.0
+	Browse Build and set it to /home/user/geant4/blowfishGDHFridge-1.0
+	Click Configure
+Choose the default "Unix Makefiles" and "Use Native Compilers"
+in the popup and click OK.
+If an error pop-up appears, click OK in it.
+
+It will complain that it cannot find the package configuration file for Geant4.
+Set "Geant4_DIR" by
+	clicking on Geant4_DIR-NOTFOUND then clicking on the [...] button
+	Choose the geant4 directory containing the "Geant4Config.cmake" file
+	e.g. /home/user/geant4/geant4-install/lib/Geant4-9.6.1
+	click "Open"
+click Configure again
+
+G4Lucid_lib, LightOutput_lib, and Lucid_lib will be highlighted in red.
+Normally these libraries will be found automatically so the correct
+paths for these should be filled in correctly. If your directory structure
+is different you may have to set these by hand by clicking on them an then
+clicking on the [...] button.
+
+Just clicking Configure again will make the red highlights go away.
+
+It should simply report "Configuring done".
+	(You do not need to change CMAKE_BUILD_TYPE or CMAKE_INSTALL_PREFIX.
+	The blowfish application can stay in this directory.)
+click Generate
+It should simply report "Generating done".
+a "Makefile" will have been created in the blowfishGDHFridge-1.0 directory.
+
+then in that directory
+type
+	make
+This will create the geant4 simulation which will be named simply "blowfish".
+
+Typing "blowfish" will run the aplication and bring up the GUI
+to allow inspection of the geometry.
+
+Typing "blowfish macrofile.mac" will run the macrofile without bring up the GUI.
+

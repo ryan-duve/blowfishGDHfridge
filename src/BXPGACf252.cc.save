@@ -1,0 +1,217 @@
+//See BXPGACf252.hh
+
+#include "BXPGACf252.hh"
+#include "BXLucid.hh"
+
+//Geant4 includes
+#include "globals.hh"
+#include "Randomize.hh"
+#include "G4ParticleDefinition.hh"
+
+//Lucid includes
+#include "G4Lucid.hh"
+#include "G4LucidEvent.hh"
+#include "G4LucidLong.hh"
+#include "G4LucidFloat.hh"
+
+//The following two arrays are from the ENDF library data for
+//spontaneous fission of Cf-252.  They are the x and y values
+//of the probability density function given by ENDF
+//We compute the cumulative distibution function to aid us in finding
+//a random energy.  Note that we use linear interpolation to integrate
+//the PDF into the CDF as this is what ENDF suggests and it gives proper
+//normalisation.
+static const G4double neutronEnergies[] = {0.0*MeV, 1e-11*MeV, 2e-11*MeV, 5e-11*MeV, 1e-10*MeV,
+	2e-10*MeV, 5e-10*MeV, 1e-09*MeV, 2e-09*MeV, 5e-09*MeV, 1e-08*MeV, 2e-08*MeV, 5e-08*MeV, 1e-07*MeV,
+	2e-07*MeV, 5e-07*MeV, 1e-06*MeV, 2e-06*MeV, 5e-06*MeV, 1e-05*MeV, 2e-05*MeV, 5e-05*MeV, 0.0001*MeV,
+	0.0002*MeV, 0.0005*MeV, 0.001*MeV, 0.002*MeV, 0.005*MeV, 0.01*MeV, 0.025*MeV, 0.03*MeV, 0.035*MeV,
+	0.045*MeV, 0.055*MeV, 0.07*MeV, 0.085*MeV, 0.1*MeV, 0.13*MeV,
+	0.16*MeV, 0.2*MeV, 0.25*MeV, 0.3*MeV, 0.37*MeV,
+	0.46*MeV, 0.5*MeV, 0.6*MeV, 0.7*MeV, 0.85*MeV, 1.0*MeV,
+	1.2*MeV, 1.5*MeV, 2.0*MeV, 2.4*MeV, 2.7*MeV, 3.0*MeV, 3.3*MeV, 3.5*MeV,
+	3.7*MeV, 3.9*MeV, 4.1*MeV, 4.3*MeV, 4.5*MeV, 4.7*MeV, 4.9*MeV,
+	5.1*MeV, 5.3*MeV, 5.5*MeV, 5.7*MeV, 5.9*MeV, 6.1*MeV,
+	6.3*MeV, 6.5*MeV, 6.7*MeV, 6.9*MeV, 7.1*MeV, 7.3*MeV, 7.5*MeV,
+	7.7*MeV, 7.9*MeV, 8.1*MeV, 8.3*MeV, 8.5*MeV, 8.7*MeV,
+	8.9*MeV, 9.1*MeV, 9.3*MeV, 9.5*MeV, 9.7*MeV, 9.9*MeV, 10.1*MeV,
+	10.3*MeV, 10.5*MeV, 10.7*MeV, 10.9*MeV, 11.1*MeV,
+	11.3*MeV, 11.5*MeV, 11.7*MeV, 11.9*MeV, 12.1*MeV, 12.3*MeV,
+	12.5*MeV, 12.7*MeV, 12.9*MeV, 13.1*MeV, 13.2*MeV,
+	13.4*MeV, 13.5*MeV, 13.7*MeV, 13.9*MeV, 14.1*MeV, 14.2*MeV,
+	14.4*MeV, 14.6*MeV, 15.3*MeV, 16.0*MeV, 16.7*MeV,
+	17.4*MeV, 18.1*MeV, 18.8*MeV, 19.5*MeV, 20.0*MeV};
+static const G4double neutronPDF[] = {0.0/MeV, 2.033e-06/MeV, 2.875e-06/MeV, 4.546e-06/MeV,
+	6.43e-06/MeV, 9.093e-06/MeV, 1.438e-05/MeV, 2.033e-05/MeV, 2.875e-05/MeV, 4.546e-05/MeV,
+	6.43e-05/MeV, 9.093e-05/MeV, 0.0001438/MeV, 0.0002033/MeV, 0.0002875/MeV, 0.0004546/MeV,
+	0.000643/MeV, 0.0009093/MeV, 0.001438/MeV, 0.002033/MeV, 0.002875/MeV, 0.004546/MeV,
+	0.006429/MeV, 0.009092/MeV, 0.01437/MeV, 0.02032/MeV, 0.02871/MeV, 0.0453/MeV, 0.06385/MeV,
+	0.09989/MeV, 0.109/MeV, 0.1174/MeV, 0.1322/MeV, 0.1452/MeV, 0.1622/MeV, 0.1769/MeV, 0.19/MeV,
+	0.2123/MeV, 0.2308/MeV, 0.2512/MeV, 0.2716/MeV, 0.2877/MeV, 0.3049/MeV, 0.3201/MeV, 0.3248/MeV,
+	0.3329/MeV, 0.3363/MeV, 0.3352/MeV, 0.3289/MeV, 0.3152/MeV, 0.2875/MeV, 0.2352/MeV, 0.195/MeV,
+	0.1677/MeV, 0.1431/MeV, 0.1213/MeV, 0.1082/MeV, 0.09636/MeV, 0.08559/MeV, 0.07588/MeV, 0.06716/MeV,
+	0.05937/MeV, 0.05242/MeV, 0.04625/MeV, 0.04078/MeV, 0.03592/MeV, 0.03163/MeV, 0.02782/MeV,
+	0.02446/MeV, 0.02149/MeV, 0.01887/MeV, 0.01655/MeV, 0.01451/MeV, 0.01272/MeV, 0.01114/MeV,
+	0.009755/MeV, 0.00854/MeV, 0.007475/MeV, 0.006541/MeV, 0.005725/MeV, 0.005011/MeV, 0.004385/MeV,
+	0.003838/MeV, 0.00336/MeV, 0.00294/MeV, 0.002573/MeV, 0.002252/MeV, 0.00197/MeV, 0.001723/MeV,
+	0.001506/MeV, 0.001317/MeV, 0.001151/MeV, 0.001007/MeV, 0.0008802/MeV, 0.0007697/MeV,
+	0.0006729/MeV, 0.0005883/MeV, 0.0005142/MeV, 0.0004494/MeV, 0.0003927/MeV, 0.000343/MeV,
+	0.0002996/MeV, 0.0002617/MeV, 0.0002284/MeV, 0.0001994/MeV, 0.0001862/MeV, 0.0001625/MeV,
+	0.0001517/MeV, 0.0001323/MeV,0.0001154/MeV, 0.0001007/MeV, 9.399e-05/MeV, 8.195e-05/MeV,
+	7.145e-05/MeV, 4.42e-05/MeV, 2.733e-05/MeV, 1.688e-05/MeV, 1.042e-05/MeV, 6.422e-06/MeV,
+	3.95e-06/MeV, 2.427e-06/MeV, 1.713e-06/MeV};
+static const G4int neutronPDFelements = sizeof(neutronPDF)/sizeof(*neutronPDF);
+static G4double neutronCDF[neutronPDFelements];
+
+
+//The following are from the JEFF library for gamma rays.  They can
+//be accessed through the ENDF library, as the above neutron spectrum was.
+//These values give the probability density function for the gamma rays emitted
+//durring spontaneous fission.
+static const G4double gammaEnergies[] = {0.00000E+00*eV,1.40000E+05*eV,3.00000E+05*eV,5.00000E+05*eV,7.00000E+05*eV,
+	1.00000E+06*eV,1.50000E+06*eV,2.00000E+06*eV,2.50000E+06*eV,3.00000E+06*eV,4.00000E+06*eV,5.00000E+06*eV,
+	6.00000E+06*eV,7.00000E+06*eV,1.00000E+07*eV};
+static const G4double gammaPDF[] = {0.00000E+00/eV,9.16551E-07/eV,8.86271E-07/eV,1.10462E-06/eV,6.16584E-07/eV,
+	3.53026E-07/eV,1.52868E-07/eV,8.13292E-08/eV,5.96694E-08/eV,2.92197E-08/eV,1.18199E-08/eV,3.63996E-09/eV,
+	2.11998E-09/eV,1.39999E-10/eV,0.00000E+00/eV};
+static const G4int gammaPDFelements = sizeof(gammaPDF)/sizeof(*gammaPDF);
+static G4double gammaCDF[gammaPDFelements];
+
+//constructor
+BXPGACf252::BXPGACf252()
+{
+	//Get Lucid variable to count the number of gammas, neutrons and x-trigs
+ 	fGammasEmitted   = G4Lucid::GetLucidPointer()->GetLucidEvent("ideal_windup")->GetLucidLong("gammas_emitted");
+	fNeutronsEmitted = G4Lucid::GetLucidPointer()->GetLucidEvent("ideal_windup")->GetLucidLong("neutrons_emitted");
+	fScaler1 = G4Lucid::GetLucidPointer()->GetLucidEvent("scalerread")->GetLucidLong("scaler1");
+	fScaler2 = G4Lucid::GetLucidPointer()->GetLucidEvent("scalerread")->GetLucidLong("scaler2");
+
+	//Create the CDF for the neutron spectrum
+	G4double integral = 0.0;
+	neutronCDF[0] = 0.0;
+	for(G4int ii = 1; ii < neutronPDFelements; ii++)
+	{
+		integral += (neutronEnergies[ii] - neutronEnergies[ii-1])*(neutronPDF[ii-1]+neutronPDF[ii])/2.0;
+		neutronCDF[ii] = integral;
+	}
+	neutronCDF[neutronPDFelements - 1] = 1.0; //incase rounding errors occured
+
+	//Create the CDF for the gamma spectrum
+	integral = 0.0;
+	gammaCDF[0] = 0.0;
+	for(G4int ii = 0; ii < gammaPDFelements; ii++)
+	{
+		integral += (gammaEnergies[ii] - gammaEnergies[ii-1])*(gammaPDF[ii-1]+gammaPDF[ii])/2.0;
+		gammaCDF[ii] = integral;
+	}
+	gammaCDF[gammaPDFelements - 1] = 1.0; //incase rounding errors occured
+}
+
+//destructor
+BXPGACf252::~BXPGACf252()
+{;}
+
+//put stuff here for the particle's position/momentum
+void BXPGACf252::GeneratePrimaries(G4Event* anEvent)
+{
+
+	//Emmit an average of 3.76 neutons per event.  I see no fundamental reason for
+	//the neutron multiplicity to have a poisson distribution, but I chose it as it
+	//is a nice distribution that peaks at the mean.
+	const G4double promptNeutronsPerFission = 3.7590;
+	G4int numbNeutronsEmitted = RandPoisson::shoot(promptNeutronsPerFission);
+	for(G4int ii = 0; ii < numbNeutronsEmitted; ii ++)
+	{
+	  	fParticleGun->SetParticleEnergy( RandomNeutronEnergy() );
+		fParticleGun->SetParticleDefinition(fParticleTable->FindParticle("neutron"));
+	 	fParticleGun->SetParticleMomentumDirection(RandomDirection());
+  		fParticleGun->GeneratePrimaryVertex(anEvent);
+		fNeutronsEmitted->Increment();
+	}
+
+	//The particle data book says that there are about 20 gammas emitted for each fission
+	const G4int gammasPerFission = 20;
+	for(G4int ii = 0; ii < gammasPerFission; ii++)
+	{
+	  	fParticleGun->SetParticleEnergy( RandomGammaEnergy() );
+		fParticleGun->SetParticleDefinition(fParticleTable->FindParticle("gamma"));
+	 	fParticleGun->SetParticleMomentumDirection(RandomDirection());
+  		fParticleGun->GeneratePrimaryVertex(anEvent);
+		fGammasEmitted->Increment();
+	}
+
+	//We increment the x-trig scaler (both real and live time)
+	fScaler1->Increment(BXLucid::scalerXarmCh);
+	fScaler2->Increment(BXLucid::scalerXarmCh);
+}
+
+	
+//returns a random neutron energy
+G4double BXPGACf252::RandomNeutronEnergy()
+{
+	G4double random = G4UniformRand(); // 0 <= rand < 1
+
+	G4double aboveCDF = 0.0;
+	G4double belowCDF = 0.0;
+	G4double aboveEnergy = 0.0;
+	G4double belowEnergy = 0.0;
+	
+	//Look for the point where the random number is
+	//between the two points of the CDF
+	for(G4int ii = 1; ii < neutronPDFelements; ii++)
+	{
+		if(random < neutronCDF[ii])
+		{
+			aboveCDF = neutronCDF[ii];
+			belowCDF = neutronCDF[ii-1];
+			aboveEnergy = neutronEnergies[ii];
+			belowEnergy = neutronEnergies[ii-1];
+			break;
+		}
+	}
+
+	//Perform linear interpolation between these points
+	G4double energy = 0.0;
+	energy += (aboveCDF - random)*belowEnergy;
+	energy += (random - belowCDF)*aboveEnergy;
+	energy /= aboveCDF - belowCDF;
+
+	//The arrays have units of MeV, so we must ensure that
+	//we return energy in MeV
+	return energy;
+}
+		
+//returns a random gamma energy
+G4double BXPGACf252::RandomGammaEnergy()
+{
+	G4double random = G4UniformRand(); // 0 <= rand < 1
+
+	G4double aboveCDF = 0.0;
+	G4double belowCDF = 0.0;
+	G4double aboveEnergy = 0.0;
+	G4double belowEnergy = 0.0;
+	
+	//Look for the point where the random number is
+	//between the two points of the CDF
+	for(G4int ii = 1; ii < gammaPDFelements; ii++)
+	{
+		if(random < gammaCDF[ii])
+		{
+			aboveCDF = gammaCDF[ii];
+			belowCDF = gammaCDF[ii-1];
+			aboveEnergy = gammaEnergies[ii];
+			belowEnergy = gammaEnergies[ii-1];
+			break;
+		}
+	}
+
+	//Perform linear interpolation between these points
+	G4double energy = 0.0;
+	energy += (aboveCDF - random)*belowEnergy;
+	energy += (random - belowCDF)*aboveEnergy;
+	energy /= aboveCDF - belowCDF;
+
+	return energy;
+}
+	
+	
+//EOF BXPGACf252.cc

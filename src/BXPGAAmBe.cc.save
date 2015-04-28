@@ -1,0 +1,104 @@
+//See BXPGAAmBe.hh
+
+#include "BXPGAAmBe.hh"
+#include "BXLucid.hh"
+
+//Geant4 includes
+#include "globals.hh"
+#include "Randomize.hh"
+#include "G4ParticleDefinition.hh"
+
+//Lucid includes
+#include "G4Lucid.hh"
+#include "G4LucidEvent.hh"
+#include "G4LucidLong.hh"
+#include "G4LucidFloat.hh"
+
+//The following values were interpolated from Figure 2 of A. Zimbal, Radiation Protection Dosimetry (2007), pp1-5.
+//They correspond to the ISO 8529 standard
+static const G4double neutronEnergies[] = {0.0*MeV, 0.1*MeV, 0.2*MeV, 0.4*MeV, 0.6*MeV, 0.8*MeV, 1.1*MeV, 1.3*MeV,
+1.5*MeV, 1.7*MeV, 1.9*MeV, 2.1*MeV, 2.3*MeV, 2.6*MeV, 2.8*MeV, 3.0*MeV, 3.3*MeV, 3.5*MeV, 3.7*MeV, 3.9*MeV, 4.1*MeV,
+4.3*MeV, 4.5*MeV, 4.7*MeV, 4.9*MeV, 5.1*MeV, 5.3*MeV, 5.5*MeV, 5.7*MeV, 6.0*MeV, 6.2*MeV, 6.4*MeV, 6.6*MeV, 6.9*MeV,
+7.1*MeV, 7.3*MeV, 7.5*MeV, 7.7*MeV, 7.9*MeV, 8.1*MeV, 8.3*MeV, 8.5*MeV, 8.7*MeV, 9.0*MeV, 9.2*MeV, 9.4*MeV, 9.6*MeV,
+9.8*MeV, 10.1*MeV, 10.3*MeV, 10.5*MeV, 10.7*MeV, 10.9*MeV};
+static G4double neutronCDF[]= {0.000/MeV, 0.028/MeV, 0.059/MeV, 0.090/MeV, 0.118/MeV, 0.142/MeV, 0.163/MeV, 0.183/MeV,
+0.200/MeV, 0.220/MeV, 0.241/MeV, 0.263/MeV, 0.285/MeV, 0.308/MeV, 0.337/MeV, 0.373/MeV, 0.410/MeV, 0.443/MeV, 0.474/MeV,
+0.502/MeV, 0.529/MeV, 0.558/MeV, 0.588/MeV, 0.619/MeV, 0.650/MeV, 0.681/MeV, 0.706/MeV, 0.729/MeV, 0.750/MeV, 0.767/MeV,
+0.785/MeV, 0.804/MeV, 0.823/MeV, 0.838/MeV, 0.853/MeV, 0.869/MeV, 0.887/MeV, 0.906/MeV, 0.922/MeV, 0.936/MeV, 0.946/MeV,
+0.953/MeV, 0.958/MeV, 0.961/MeV, 0.966/MeV, 0.971/MeV, 0.978/MeV, 0.984/MeV, 0.989/MeV, 0.994/MeV, 0.997/MeV, 0.999/MeV,
+1.000/MeV };
+static const G4int neutronCDFelements = sizeof(neutronCDF)/sizeof(*neutronCDF);
+
+//constructor
+BXPGAAmBe::BXPGAAmBe()
+{
+	//Get Lucid variable to count the number of gammas, neutrons and x-trigs
+ 	fGammasEmitted   = G4Lucid::GetLucidPointer()->GetLucidEvent("ideal_windup")->GetLucidLong("gammas_emitted");
+	fNeutronsEmitted = G4Lucid::GetLucidPointer()->GetLucidEvent("ideal_windup")->GetLucidLong("neutrons_emitted");
+}
+
+//destructor
+BXPGAAmBe::~BXPGAAmBe()
+{;}
+
+//put stuff here for the particle's position/momentum
+void BXPGAAmBe::GeneratePrimaries(G4Event* anEvent)
+{
+	//Neutron emitted from the 9Be(alpha,n)12C reaction
+	fParticleGun->SetParticleEnergy( RandomNeutronEnergy() );
+	fParticleGun->SetParticleDefinition(fParticleTable->FindParticle("neutron"));
+ 	fParticleGun->SetParticleMomentumDirection(RandomDirection());
+ 	fParticleGun->GeneratePrimaryVertex(anEvent);
+	fNeutronsEmitted->Increment();
+
+	//Gamma-rays can be emitted from the 2+ state of 12C
+	const G4double gammasPerNeutron = 0.591; //Nim A _281_, 103 (1989)
+	G4double random = G4UniformRand(); // 0 <= rand < 1
+	if(random < gammasPerNeutron) //emit a gamma
+	{
+  		fParticleGun->SetParticleEnergy( 4.438*MeV );
+		fParticleGun->SetParticleDefinition(fParticleTable->FindParticle("gamma"));
+ 		fParticleGun->SetParticleMomentumDirection(RandomDirection());
+  		fParticleGun->GeneratePrimaryVertex(anEvent);
+		fGammasEmitted->Increment();
+	}
+}
+
+	
+//returns a random neutron energy
+G4double BXPGAAmBe::RandomNeutronEnergy()
+{
+	G4double random = G4UniformRand(); // 0 <= rand < 1
+
+	G4double aboveCDF = 0.0;
+	G4double belowCDF = 0.0;
+	G4double aboveEnergy = 0.0;
+	G4double belowEnergy = 0.0;
+	
+	//Look for the point where the random number is
+	//between the two points of the CDF
+	for(G4int ii = 1; ii < neutronCDFelements; ii++)
+	{
+		if(random < neutronCDF[ii])
+		{
+			aboveCDF = neutronCDF[ii];
+			belowCDF = neutronCDF[ii-1];
+			aboveEnergy = neutronEnergies[ii];
+			belowEnergy = neutronEnergies[ii-1];
+			break;
+		}
+	}
+
+	//Perform linear interpolation between these points
+	G4double energy = 0.0;
+	energy += (aboveCDF - random)*belowEnergy;
+	energy += (random - belowCDF)*aboveEnergy;
+	energy /= aboveCDF - belowCDF;
+
+	//The arrays have units of MeV, so we must ensure that
+	//we return energy in MeV
+	return energy;
+}
+	
+	
+//EOF BXPGAAmBe.cc

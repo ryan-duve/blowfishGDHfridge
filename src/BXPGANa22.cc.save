@@ -1,0 +1,67 @@
+//See BXPGANa22.hh
+
+#include "BXPGANa22.hh"
+
+//Geant4 includes
+#include "globals.hh"
+#include "Randomize.hh"
+#include "G4ParticleDefinition.hh"
+
+//Lucid includes
+#include "G4Lucid.hh"
+#include "G4LucidEvent.hh"
+#include "G4LucidLong.hh"
+
+//constructor
+BXPGANa22::BXPGANa22()
+{
+	//Get Lucid variable to count the number of geantino hits
+	fGammasEmitted    = G4Lucid::GetLucidPointer()->GetLucidEvent("ideal_windup")->GetLucidLong("gammas_emitted");
+
+} //end of constructor
+
+//destructor
+BXPGANa22::~BXPGANa22()
+{;}
+
+//Generate a new particle with position and momentum
+void BXPGANa22::GeneratePrimaries(G4Event* anEvent)
+{
+	//Sets the direction and energy of the gamma ray: almost 100% probale (99.964%)
+	//From ENSDF database, 26 June 2006
+ 	fParticleGun->SetParticleMomentumDirection(RandomDirection());
+  	fParticleGun->SetParticleEnergy(1274.537*keV );
+  	fParticleGun->SetParticleDefinition(fParticleTable->FindParticle("gamma"));
+  	fParticleGun->GeneratePrimaryVertex(anEvent);
+
+	//Inform Lucid that a gamma has been emitted
+	fGammasEmitted->Increment();
+	
+	//Sets the direction and energy of the annihilation photons
+	//Note that a prositron decay happens only 90% of the time
+	//Otherwise, we get an electon conversion, which is not simulated.
+	//From ENSDF database, 26 June 2006
+	const G4double positronProbability = 0.9033;
+	G4double positronRandom = G4UniformRand();
+	if(positronRandom <= positronProbability)
+	{	
+  		fParticleGun->SetParticleEnergy( 511.*keV );
+		G4ThreeVector direction = RandomDirection();
+
+		//Emit first particle
+	 	fParticleGun->SetParticleMomentumDirection(direction);
+  		fParticleGun->GeneratePrimaryVertex(anEvent);
+		fGammasEmitted->Increment();
+	 	
+		//Emit second particle: note that they will not necessarially
+		//be emitted back to back if the positron has momentum, but this
+		//is a good enough approximation as we are really interested in the
+		//high energy gamma.
+		fParticleGun->SetParticleMomentumDirection(-direction);
+  		fParticleGun->GeneratePrimaryVertex(anEvent);
+		fGammasEmitted->Increment();
+	}
+
+}
+
+//EOF BXPGANa22.cc

@@ -1,0 +1,83 @@
+/************************************************************
+ * BXPGAAmBe.hh
+ *
+ * Ward Wurtz (waw113@mail.usask.ca)
+ * Subatomic Physics Graduate Student
+ * University of Saskatchewan
+ * Saskatoon, SK CANADA
+ * Supervisors: Rob Pywell 
+ *
+ * Description:
+ *
+ * This class defines the initial particles and its energy, momentum
+ * and direction.  Emits AmBe gamma rays and neutrons.
+ * Does not emmit alpha particles, beta particles or gamma rays
+ * other than the 4.44 MeV line.  Gamma rays from neutron capture are
+ * not produced as these are dependent on geometry.
+ *
+ * Credits:
+ * 
+ * Much of this code is from my supervisor, Dr. Pywell and the
+ * examples produced by the Geant4 Collaboration and distributed
+ * with GEANT4.  Lisence details for the GEANT4 collaboration code
+ * can be found at http://geant4.web.cern.ch/geant4/license/
+ * Since these details are vague, I assume that all code is released
+ * under an LGPL or BSD-like license.
+ * 
+ ********************************************************************
+ * DISCLAIMER                                                       *
+ *                                                                  *
+ * The following disclaimer summarizes all the specific disclaimers *
+ * of contributors to this software. The specific disclaimers,which *
+ * govern, are listed with their locations in:                      *
+ *   http://cern.ch/geant4/license                                  *
+ *                                                                  *
+ * Neither the authors of this software system, nor their employing *
+ * institutes,nor the agencies providing financial support for this *
+ * work  make  any representation or  warranty, express or implied, *
+ * regarding  this  software system or assume any liability for its *
+ * use.                                                             *
+ *                                                                  *
+ * By copying,  distributing  or modifying the Program (or any work *
+ * based  on  the Program)  you indicate  your  acceptance of  this *
+ * statement, and all its terms.                                    *
+ ********************************************************************/
+
+#ifndef BXPGAAmBe_h
+#define BXPGAAmBe_h 1
+
+//Geant4 classes
+#include "G4Event.hh"
+
+//class that we derive this class from
+#include "BXPrimaryGeneratorAction.hh"
+
+//G4Lucid clases
+class G4LucidLong;
+
+using namespace CLHEP;
+
+class BXPGAAmBe : public BXPrimaryGeneratorAction
+{
+	public:
+
+	//constructor and destructor
+    	BXPGAAmBe();
+    	~BXPGAAmBe();
+
+	//used by Geant4 to generate the primary particles of the event
+    	void GeneratePrimaries(G4Event* anEvent);
+
+	private:
+
+	//returns a random neutron/gamma energy
+	G4double RandomNeutronEnergy(void);
+	
+	//G4Lucid variables
+	G4LucidLong * fGammasEmitted;
+	G4LucidLong * fNeutronsEmitted;
+};
+
+#endif
+
+//EOF BXPGAAmBe.hh
